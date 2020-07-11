@@ -33,6 +33,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<String> getRolesByName(String username) {
+        return userMapper.getRolesByName(username);
+    }
+
+    @Override
+    public User getByName(String username) {
+        return userMapper.getByName(username);
+    }
+
+    @Override
     public User getById(String userid) {
         return userMapper.getById(userid);
     }
@@ -49,13 +59,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PageInfo<User> getAllByFilter(Integer pageNum, Integer pageSize) {
-        return this.getAllByFilter(pageNum,pageSize, new HashMap());
+        return this.getAllByFilter(pageNum, pageSize, new HashMap<>());
     }
 
     @Override
     public PageInfo<User> getAllByFilter(Integer pageNum, Integer pageSize, Map<String, Object> map) {
-        PageHelper.startPage(pageNum,pageSize,true);
+        PageHelper.startPage(pageNum, pageSize, true);
         List<User> users = userMapper.getAllByFilter(map);
+
         return new PageInfo<>(users);
     }
 }

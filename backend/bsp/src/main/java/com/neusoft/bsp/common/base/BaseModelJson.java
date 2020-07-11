@@ -2,7 +2,7 @@ package com.neusoft.bsp.common.base;
 
 public class BaseModelJson<T> extends BaseModel {
 
-    public T data;
+  public T data;
 
     @Override
     public String toString() {
@@ -12,6 +12,4 @@ public class BaseModelJson<T> extends BaseModel {
                 ", message='" + message + '\'' +
                 '}';
     }
-
-    //result.data
 }
