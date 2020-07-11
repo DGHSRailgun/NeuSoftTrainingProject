@@ -6,8 +6,11 @@ public class BusinessException extends RuntimeException {
     public static final BusinessException INSERT_FAIL = new BusinessException(504, "add operation failed", new Object[0]);
     public static final BusinessException UPDATE_FAIL = new BusinessException(504, "update operation failed", new Object[0]);
     public static final BusinessException DELETE_FAIL = new BusinessException(504, "delete operation failed", new Object[0]);
+    public static final BusinessException INSERT_OR_UPDATE_FAIL = new BusinessException(504, "delete operation failed", new Object[0]);
     public static final BusinessException USERID_NULL_ERROR = new BusinessException(504, "userid shouln't be null", new Object[0]);
     public static final BusinessException BRDID_NULL_ERROR = new BusinessException(504, "brdid shouln't be null", new Object[0]);
+    public static final BusinessException PROID_NULL_ERROR = new BusinessException(504, "brdid shouln't be null", new Object[0]);
+    public static final BusinessException SAOID_NULL_ERROR = new BusinessException(504, "brdid shouln't be null", new Object[0]);
     int code;
     String msg;
 

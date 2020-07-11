@@ -8,8 +8,8 @@ import com.neusoft.bsp.common.exception.BusinessException;
 import com.neusoft.bsp.common.validationGroup.DeleteGroup;
 import com.neusoft.bsp.common.validationGroup.InsertGroup;
 import com.neusoft.bsp.common.validationGroup.UpdateGroup;
-import com.neusoft.bsp.mvoinfor.entity.BrdBrand;
-import com.neusoft.bsp.mvoinfor.service.BrdBrandService;
+import com.neusoft.bsp.mvoinfo.entity.BrdBrand;
+import com.neusoft.bsp.mvoinfo.service.BrdBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -33,11 +33,13 @@ public class BrdBrandController extends BaseController {
             BaseModelJson<List<BrdBrand>> result = new BaseModelJson();
             result.data = resultList;
             result.code = 200;
+            result.message = "success";
             return result;
         }else {
             BaseModelJson<List<BrdBrand>> empty = new BaseModelJson();
             empty.data = null;
             empty.code = 200;
+            empty.message = "no result";
             return empty;
         }
     }
@@ -53,6 +55,7 @@ public class BrdBrandController extends BaseController {
             int i = brdBrandService.insertBrand(brdBrand);
             if (i == 1) {
                 result.code = 200;
+                result.message = "success";
                 return result;
             } else {
                 throw BusinessException.INSERT_FAIL;
@@ -71,6 +74,7 @@ public class BrdBrandController extends BaseController {
             int i = brdBrandService.deleteBrand(brdBrand.getBrd_id());
             if (i == 1) {
                 result.code = 200;
+                result.message = "success";
                 return result;
             } else {
                 throw BusinessException.DELETE_FAIL;
@@ -89,6 +93,7 @@ public class BrdBrandController extends BaseController {
             int i =brdBrandService.updateBrand(brdBrand);
             if(i==1){
                 result.code = 200;
+                result.message = "success";
                 return result;
             }else{
                 throw BusinessException.UPDATE_FAIL;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.bsp.mvoinfor.mapper.ImgImageMapper">
+<mapper namespace="com.neusoft.bsp.mvoproduct.mapper.ImgImageMapper">
     <select id="searchImg" parameterType="int" resultType="ImgImage">
         select * from img_image where entity_id = #{pro_id} and entity_cd = 'pro'
     </select>
