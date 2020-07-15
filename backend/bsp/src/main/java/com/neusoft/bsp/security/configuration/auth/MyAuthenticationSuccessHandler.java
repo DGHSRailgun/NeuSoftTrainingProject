@@ -33,6 +33,8 @@ public class MyAuthenticationSuccessHandler extends JSONAuthentication implement
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
+
+        System.out.println("===========success==============");
         //取得账号信息
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         SecurityContextHolder.getContext().setAuthentication(authentication);

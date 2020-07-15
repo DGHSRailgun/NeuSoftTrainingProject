@@ -40,8 +40,44 @@ public class MenuController extends BaseController {
         return result;
     }
 
+    @PostMapping("/getMenuByRoleId")
+    public BaseModelJson<List<Menu>> getMenuByRoleId(@RequestParam String id)
+    {
 
+        BaseModelJson<List<Menu>> result = new BaseModelJson();
 
+        result.code = 200;
+        result.data = menuService.getMenuByRoleId(id);
+        return result;
+    }
+
+    @PostMapping("/getAll")
+    public BaseModelJson<List<Menu>> getAll()
+    {
+
+        BaseModelJson<List<Menu>> result = new BaseModelJson();
+
+        result.code = 200;
+        result.data = menuService.getAll();
+        return result;
+    }
+
+    @PostMapping("/deleteByUrlAndName")
+    public BaseModelJson<Integer> deleteByUrl(@RequestParam String url, @RequestParam String name){
+        BaseModelJson<Integer> result = new BaseModelJson();
+        result.code=200;
+        result.data = menuService.deleteByUrlAndName(url, name);
+        return result;
+    }
+
+    @PostMapping("/updateById")
+    @ResponseBody
+    public BaseModelJson<Integer> updateById(@RequestBody Menu menu){
+        BaseModelJson<Integer> result = new BaseModelJson();
+        result.code=200;
+        result.data = menuService.updateById(menu);
+        return result;
+    }
 
 
 }

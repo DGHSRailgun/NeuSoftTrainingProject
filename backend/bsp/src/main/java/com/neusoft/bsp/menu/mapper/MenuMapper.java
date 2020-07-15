@@ -13,4 +13,18 @@ public interface MenuMapper{
 
     Menu getById(String menuid);
 
+    List<Menu> getAll();
+
+    int deleteByUrl(String url);
+
+    int deleteById(String id);
+
+    Menu getByUrlAndName(String url, String name);
+
+    int deleteByParentId(String id);
+
+    int updateById(Menu menu);
+
+    List<Menu> getMenuByRoleId(String id);
+
 }

@@ -27,5 +27,13 @@ public interface UserService {
 
     PageInfo<User> getAllByFilter(Integer pageNum, Integer pageSize, Map<String, Object> map);
 
+    /**
+     * 个性化验证登录
+     * @param username 账号
+     * @param rawPassword 原始密码
+     * @return
+     */
+    boolean checkLogin(String username,String rawPassword) throws Exception;
+
 
 }

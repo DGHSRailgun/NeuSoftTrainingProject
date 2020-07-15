@@ -2,6 +2,7 @@ package com.neusoft.bsp.user.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.bsp.security.components.BCryptPasswordEncoderUtil;
 import com.neusoft.bsp.user.entity.User;
 import com.neusoft.bsp.user.mapper.UserMapper;
 import com.neusoft.bsp.user.service.UserService;
@@ -14,6 +15,10 @@ import java.util.Map;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    BCryptPasswordEncoderUtil bCryptPasswordEncoderUtil;
+
     @Autowired
     UserMapper userMapper;
 
@@ -55,6 +60,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllByFilter(Map<String, Object> map) {
         return userMapper.getAllByFilter(map);
+    }
+
+    /**
+     * 个性化验证登录
+     * @param username 账号
+     * @param rawPassword 原始密码
+     * @return
+     */
+    @Override
+    public boolean checkLogin(String username,String rawPassword) throws Exception {
+        User user = this.getByName(username);
+        System.out.println("user = " + user);
+        if (user == null) {
+            //System.out.println("checkLogin--------->账号不存在，请重新尝试！");
+            //设置友好提示
+            throw  new Exception("账号不存在，请重新尝试！");
+        }else {
+            //加密的密码
+            String encodedPassword = user.getPassword();
+            //和加密后的密码进行比配
+            if(!bCryptPasswordEncoderUtil.matches(rawPassword,encodedPassword)) {
+                //System.out.println("checkLogin--------->密码不正确！");
+                //设置友好提示
+                throw new Exception("密码不正确！");
+            }else{
+                return  true;
+            }
+        }
     }
 
     @Override

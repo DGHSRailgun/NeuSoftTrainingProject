@@ -12,4 +12,12 @@ public interface MenuService {
 
     Menu getById(String menuid);
 
+    List<Menu> getAll();
+
+    int deleteByUrlAndName(String url,String name);
+
+    int updateById(Menu menu);
+
+    List<Menu> getMenuByRoleId(String id);
+
 }
