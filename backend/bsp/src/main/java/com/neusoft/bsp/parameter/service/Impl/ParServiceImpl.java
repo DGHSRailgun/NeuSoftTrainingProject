@@ -33,4 +33,9 @@ public class ParServiceImpl implements ParService {
     public int deletePar(int par_id) {
         return parMapper.deletePar(par_id);
     }
+
+    @Override
+    public List<Par> searchParByCd(String param_cd) {
+        return parMapper.searchParByCd(param_cd);
+    }
 }

@@ -33,4 +33,9 @@ public class CdmServiceImpl implements CdmService {
     public int deleteCdm(int cdm_id) {
         return cdmMapper.deleteCdm(cdm_id);
     }
+
+    @Override
+    public List<Cdm> searchCdmByCt(String code_type) {
+        return cdmMapper.searchCdmByCt(code_type);
+    }
 }

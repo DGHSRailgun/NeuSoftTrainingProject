@@ -21,5 +21,8 @@ public interface CdmMapper extends BaseMapper<String, Cdm> {
     //根据cmd_id(主键)删除cdm
     int deleteCdm(int cdm_id);
 
+    //根据code_type查询cdm
+    List<Cdm> searchCdmByCt(String code_type);
+
 
 }

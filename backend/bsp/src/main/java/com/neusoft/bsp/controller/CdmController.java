@@ -24,7 +24,7 @@ public class CdmController extends BaseController {
     CdmService cdmService;
 
     //查询cdm
-    @RequestMapping("/searchAllPar")
+    @RequestMapping("/searchAllCdm")
     public BaseModelJson<List<Cdm>> searchAllCdm(){
         List<Cdm> resultList = cdmService.searchAllCdm();
         BaseModelJson<List<Cdm>> result = new BaseModelJson();
@@ -81,12 +81,12 @@ public class CdmController extends BaseController {
 
     //删除cdm
     @RequestMapping("/deleteCdm")
-    public BaseModel deleteCdm(@RequestBody int cdm_id, BindingResult bindingResult){//前端传回修改值和所有未改变的值
+    public BaseModel deleteCdm(@RequestBody Cdm cdm, BindingResult bindingResult){//前端传回修改值和所有未改变的值
         if (bindingResult.hasErrors()){
             throw BusinessException.DELETE_FAIL.newInstance(this.getErrorResponse(bindingResult),
-                    new Object[]{cdm_id});
+                    new Object[]{cdm});
         }else {
-            int i = cdmService.deleteCdm(cdm_id);
+            int i = cdmService.deleteCdm(cdm.getCdm_id());
             BaseModel result = new BaseModel();
             if (i == 1){
                 result.code = 200;
@@ -97,6 +97,24 @@ public class CdmController extends BaseController {
             }
             return result;
         }
+    }
+
+    //根据param_cd查询par
+    @RequestMapping("/searchCdmByCt")
+    public BaseModelJson<List<Cdm>> searchCdmByCt(@RequestBody Cdm cdm){
+
+        List<Cdm> resultList = cdmService.searchCdmByCt("%"+cdm.getCode_type()+"%");//模糊匹配
+        BaseModelJson<List<Cdm>> result = new BaseModelJson();
+        result.data = resultList;
+        if (resultList.size() != 0){
+            result.message = "success";
+            result.code = 200;
+        }else {
+            result.message = "no result";
+            result.code = 201;
+        }
+
+        return result;
     }
 
 

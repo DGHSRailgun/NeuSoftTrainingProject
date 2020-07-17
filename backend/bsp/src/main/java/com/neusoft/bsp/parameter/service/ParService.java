@@ -14,4 +14,6 @@ public interface ParService {
 
     int deletePar(int par_id);
 
+    List<Par> searchParByCd(String param_cd);
+
 }

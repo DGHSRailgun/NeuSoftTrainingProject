@@ -121,37 +121,37 @@ export const constantRoutes = [
         meta: { title: 'Profile', icon: 'user', noCache: true }
       }
     ]
+  },
+  {
+    path: '/parameter',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/parameter/index'),
+        name: 'Parameter',
+        meta: {
+          title: 'Parameter',
+          icon: 'icon'
+        }
+      }
+    ]
+  },
+  {
+    path: '/codemaster',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/cdm/index'),
+        name: 'CodeMaster',
+        meta: {
+          title: 'CodeMaster',
+          icon: 'education'
+        }
+      }
+    ]
   }
-  // {
-  //   path: '/parameter',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/parameter/index'),
-  //       name: 'Parameter',
-  //       meta: {
-  //         title: 'Parameter',
-  //         icon: 'icon'
-  //       }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/codemaster',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/cdm/index'),
-  //       name: 'CodeMaster',
-  //       meta: {
-  //         title: 'CodeMaster',
-  //         icon: 'education'
-  //       }
-  //     }
-  //   ]
-  // }
   // {
   //   path: '/menu',
   //   component: Layout,

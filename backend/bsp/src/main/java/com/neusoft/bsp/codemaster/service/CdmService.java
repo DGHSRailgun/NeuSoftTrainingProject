@@ -14,4 +14,6 @@ public interface CdmService {
 
     int deleteCdm(int cdm_id);
 
+    List<Cdm> searchCdmByCt(String code_type);
+
 }

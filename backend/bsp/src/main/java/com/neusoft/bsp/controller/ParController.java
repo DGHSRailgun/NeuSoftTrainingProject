@@ -82,12 +82,12 @@ public class ParController extends BaseController {
 
     //删除par
     @RequestMapping("/deletePar")
-    public BaseModel deletePar(@RequestBody int par_id, BindingResult bindingResult){//前端传回修改值和所有未改变的值
+    public BaseModel deletePar(@RequestBody Par par, BindingResult bindingResult){//前端传回修改值和所有未改变的值
         if (bindingResult.hasErrors()){
             throw BusinessException.DELETE_FAIL.newInstance(this.getErrorResponse(bindingResult),
-                    new Object[]{par_id});
+                    new Object[]{par});
         }else {
-            int i = parService.deletePar(par_id);
+            int i = parService.deletePar(par.getPar_id());
             BaseModel result = new BaseModel();
             if (i == 1){
                 result.code = 200;
@@ -98,6 +98,24 @@ public class ParController extends BaseController {
             }
             return result;
         }
+    }
+
+    //根据param_cd查询par
+    @RequestMapping("/searchParByCd")
+    public BaseModelJson<List<Par>> searchParByCd(@RequestBody Par par){
+
+        List<Par> resultList = parService.searchParByCd("%"+par.getParam_cd()+"%");//模糊匹配
+        BaseModelJson<List<Par>> result = new BaseModelJson();
+        result.data = resultList;
+        if (resultList.size() != 0){
+            result.message = "success";
+            result.code = 200;
+        }else {
+            result.message = "no result";
+            result.code = 201;
+        }
+
+        return result;
     }
 
 
