@@ -52,7 +52,7 @@ public class UserController extends BaseController {
         map.put("password", user.getPassword());
         List<User> users = userService.getAllByFilter(map);
         if (users.size() == 0) {
-            throw BusinessException.USERNAME_NOT_EXSITS;
+            throw BusinessException.USERNAME_NOT_EXISTS;
         } else {
             BaseModelJson<List<User>> result = new BaseModelJson<>();
             result.code = 200;
