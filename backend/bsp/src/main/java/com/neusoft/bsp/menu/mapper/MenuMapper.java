@@ -3,6 +3,7 @@ package com.neusoft.bsp.menu.mapper;
 
 import com.neusoft.bsp.common.base.BaseMapper;
 import com.neusoft.bsp.menu.entity.Menu;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,5 +27,15 @@ public interface MenuMapper{
     int updateById(Menu menu);
 
     List<Menu> getMenuByRoleId(String id);
+
+    List<Menu> getAllFather();
+
+    int insert(@Param("role_id") String role_id, @Param("frontend_menu_id") String frontend_menu_id);
+
+    int deleteAuthByRoleId(String role_id);
+
+    List<Menu> getByParentId(String parent_id);
+
+    int addMenu(Menu menu);
 
 }

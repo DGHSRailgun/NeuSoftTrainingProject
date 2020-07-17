@@ -1,6 +1,8 @@
 package com.neusoft.bsp.role.entity;
 
-public class Role {
+import com.neusoft.bsp.common.base.BaseEntity;
+
+public class Role implements BaseEntity<String> {
     String role_id;
     String role_name;
     String description;
@@ -36,5 +38,10 @@ public class Role {
                 ", role_name='" + role_name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getId() {
+        return role_id;
     }
 }

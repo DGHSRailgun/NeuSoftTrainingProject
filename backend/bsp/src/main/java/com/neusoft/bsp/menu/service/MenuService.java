@@ -20,4 +20,14 @@ public interface MenuService {
 
     List<Menu> getMenuByRoleId(String id);
 
+    List<Menu> getAllFather();
+
+    int insertAuthByRoleId(String role_id, List<String> menu_ids);
+
+    int deleteByRoleId(String role_id);
+
+    int addMenu(Menu menu);
+
+    int deleteById(String id);
+
 }

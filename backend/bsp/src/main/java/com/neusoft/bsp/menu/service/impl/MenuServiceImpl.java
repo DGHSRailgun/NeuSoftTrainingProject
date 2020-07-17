@@ -8,6 +8,7 @@ import com.neusoft.bsp.menu.service.MenuService;
 import com.neusoft.bsp.user.entity.User;
 import com.neusoft.bsp.user.mapper.UserMapper;
 import com.neusoft.bsp.user.service.UserService;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,17 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public int deleteById(String id) {
+        Menu todelete = menuMapper.getById(id);
+        // 如果是父菜单
+        if (todelete.getParent_id() == null){
+            String fid = todelete.getMenu_id();
+            menuMapper.deleteByParentId(fid);
+        }
+        return menuMapper.deleteById(id);
+    }
+
+    @Override
     public Menu getById(String menuid) {
         return menuMapper.getById(menuid);
     }
@@ -47,7 +59,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public int deleteByUrlAndName(String url, String name) {
         Menu todelete = menuMapper.getByUrlAndName(url, name);
-        System.out.println("name" + name);
+        // System.out.println("name" + name);
         // 如果是父菜单
         if (todelete.getParent_id() == null){
             String id = todelete.getMenu_id();
@@ -81,6 +93,11 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public List<Menu> getAllFather() {
+        return menuMapper.getAllFather();
+    }
+
+    @Override
     public List<Menu> getMenuByRoleId(String id) {
         return menuMapper.getMenuByRoleId(id);
     }
@@ -88,5 +105,32 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public int updateById(Menu menu) {
         return menuMapper.updateById(menu);
+    }
+
+    // 连同子菜单一块插入
+    @Override
+    public int insertAuthByRoleId(String role_id, List<String> menu_ids) {
+        for (String menu_id:menu_ids){
+            List<Menu> childMenus = menuMapper.getByParentId(menu_id);
+            for(Menu childMenu: childMenus){
+                menuMapper.insert(role_id, childMenu.getMenu_id());
+            }
+            menuMapper.insert(role_id, menu_id);
+        }
+        return 1;
+    }
+
+    @Override
+    public int addMenu(Menu menu) {
+        //如果为父级菜单，资源路径自动分配为#
+        if(menu.getMenu_url() == null){
+            menu.setMenu_url("#");
+        }
+        return menuMapper.addMenu(menu);
+    }
+
+    @Override
+    public int deleteByRoleId(String role_id) {
+        return menuMapper.deleteAuthByRoleId(role_id);
     }
 }
