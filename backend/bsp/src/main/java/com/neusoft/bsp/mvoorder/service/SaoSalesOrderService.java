@@ -12,4 +12,6 @@ public interface SaoSalesOrderService {
 
     int shipSao(int sao_id);
 
+    int cancelSao(int sao_id);
+
 }

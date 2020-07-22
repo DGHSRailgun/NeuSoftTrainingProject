@@ -33,4 +33,24 @@ public class ProProductServiceImpl implements ProProductService {
     public int updateAIPro(int pro_id, String sts_cd) {
         return proProductMapper.updateAIPro(pro_id, sts_cd);
     }
+
+    @Override
+    public int updateByProId(String pro_id, String title) {
+        return proProductMapper.updateByProId(pro_id, title);
+    }
+
+    @Override
+    public int updateByPro_id(String pro_id, String sku_cd, String title, String upc, String ean, String model, String warranty_day, String retail_price) {
+        return proProductMapper.updateByPro_id(pro_id, sku_cd, title, upc, ean, model, warranty_day, retail_price);
+    }
+
+    @Override
+    public int insertByPro_id(String pro_id, String sku_cd,String man_id, String title, String upc, String ean, String model, String warranty_day, String retail_price) {
+        return proProductMapper.insertByPro_id(pro_id, sku_cd, man_id, title, upc, ean, model, warranty_day, retail_price);
+    }
+
+    @Override
+    public int getMaxId() {
+        return proProductMapper.getMaxId();
+    }
 }

@@ -14,4 +14,10 @@
                         #{last_update_date},#{call_cnt},#{remark},#{sts_cd})
     </insert>
 
+
+    <select id="searchLatestManiId" resultType="int">
+        select max(man_id) from man_manufacturer
+    </select>
+
+
 </mapper>

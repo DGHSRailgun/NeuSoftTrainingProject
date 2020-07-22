@@ -38,4 +38,9 @@ public class WtrServiceImpl implements WtrService {
     public int updateWtrStatus(int transaction_id, int status) {
         return wtrMapper.updateWtrStatus(transaction_id, status);
     }
+
+    @Override
+    public int getMaxId() {
+        return wtrMapper.getMaxId();
+    }
 }

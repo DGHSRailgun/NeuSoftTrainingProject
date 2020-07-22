@@ -16,5 +16,7 @@ public interface WtrService {
 
     int updateWtrStatus(int transaction_id, int status);
 
+    int getMaxId();
+
 
 }

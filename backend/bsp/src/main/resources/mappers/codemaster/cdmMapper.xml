@@ -20,11 +20,15 @@
                                    creation_date = #{creation_date}, last_update_by = #{last_update_by},
                                    last_update_date = #{last_update_date}, call_cnt = #{call_cnt}, remark = #{remark},
                                    sts_cd = #{sts_cd}
-                               where cdm_id = #{cdm_id}
+        where cdm_id = #{cdm_id}
     </update>
 
     <delete id="deleteCdm" parameterType="int">
         delete from cdm_code_master where cdm_id = #{cdm_id}
     </delete>
+
+    <select id="searchCdmByCt" resultType="Cdm">
+        select * from cdm_code_master where code_type like #{code_type}
+    </select>
 
 </mapper>

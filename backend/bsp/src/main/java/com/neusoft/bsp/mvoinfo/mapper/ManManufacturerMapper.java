@@ -10,6 +10,7 @@ public interface ManManufacturerMapper extends BaseMapper<String, ManManufacture
     ManManufacturer findInfoByMVO(int man_id);
     //更新(man_manufacturer)
     int insert(ManManufacturer manManufacturer);
-
+    //选取刚加入最大的一条记录的man_id(反馈给user的man_buyer_id)
+    int searchLatestManiId();
 
 }

@@ -7,4 +7,13 @@
         select * from pdn_product_descrition where pro_id = #{pro_id}
     </select>
 
+    <update id="updateByPro_id">
+        update pdn_product_descrition set descrition = #{descrition} where pro_id = #{pro_id}
+    </update>
+
+    <insert id="insertByPro_id" >
+        insert into pdn_product_descrition values(null,#{pro_id},null,#{descrition},null
+                                        ,null,null,null,null,null,null)
+    </insert>
+
 </mapper>

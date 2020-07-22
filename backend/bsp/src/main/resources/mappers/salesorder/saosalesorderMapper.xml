@@ -16,4 +16,9 @@
         update sao_sales_order set order_sts = 'SHIPPED' where sao_id = #{sao_id}
     </update>
 
+    <update id="cancelSao" parameterType="int">
+        update sao_sales_order set order_sts = 'Canceled' where sao_id = #{sao_id}
+    </update>
+
+
 </mapper>

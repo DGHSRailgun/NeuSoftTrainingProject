@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neusoft.bsp.wallet.mapper.WtaMapper">
 
-    <insert id="insertWta" parameterType="Wta">
+    <insert id="insertWta" parameterType="Wta" >
         insert into wta_wallet_transaction_aduit values (null,#{buyer_id},#{transaction_id},#{available_money_before},
                                                          #{depositing_money_before},#{withdrawing_money_before},
                                                          #{operate_money},#{operate_type},#{available_money_after},

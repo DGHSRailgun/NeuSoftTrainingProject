@@ -21,4 +21,9 @@ public class ManManufacturerServiceImpl implements ManManufacturerService {
     public int insert(ManManufacturer manManufacturer) {
         return manManufacturerMapper.insert(manManufacturer);
     }
+
+    @Override
+    public int searchLatestManiId() {
+        return manManufacturerMapper.searchLatestManiId();
+    }
 }

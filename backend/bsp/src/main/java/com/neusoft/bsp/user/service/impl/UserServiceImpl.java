@@ -102,4 +102,14 @@ public class UserServiceImpl implements UserService {
 
         return new PageInfo<>(users);
     }
+
+    @Override
+    public int getBuyerIdByUserName(String username) {
+        return userMapper.getBuyerIdByUserName(username);
+    }
+
+    @Override
+    public int updateBuyerId(String username, int man_buyer_id) {
+        return userMapper.updateBuyerId(username, man_buyer_id);
+    }
 }

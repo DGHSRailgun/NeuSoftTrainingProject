@@ -21,4 +21,11 @@ public interface ProProductMapper extends BaseMapper<String, ProProduct> {
     //根据pro_id更新上架(A)下架(I)状态
     int updateAIPro(@Param("pro_id") int pro_id, @Param("sts_cd") String sts_cd);
 
+    int updateByProId(String pro_id, String title);
+
+    int updateByPro_id(String pro_id, String sku_cd, String title, String upc, String ean, String model, String warranty_day, String retail_price);
+
+    int insertByPro_id(String pro_id, String sku_cd,String man_id, String title,  String upc, String ean, String model, String warranty_day, String retail_price);
+
+    int getMaxId();
 }

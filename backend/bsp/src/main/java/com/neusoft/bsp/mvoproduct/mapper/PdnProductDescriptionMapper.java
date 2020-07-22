@@ -9,4 +9,8 @@ public interface PdnProductDescriptionMapper extends BaseMapper<String, PdnProdu
     //根据pro_id查询pdn(唯一)
     PdnProductDescription searchPdn(int pro_id);
 
+    int insertByPro_id(String pro_id, String descrition);
+
+    int updateByPro_id(String pro_id, String descrition);
+
 }

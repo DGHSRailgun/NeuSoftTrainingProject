@@ -17,6 +17,9 @@ public interface SaoSalesOrderMapper extends BaseMapper<String, SaoSalesOrder> {
     //发货
     int shipSao(int sao_id);
 
+    //取消
+    int cancelSao(int sao_id);
+
 
 
 }

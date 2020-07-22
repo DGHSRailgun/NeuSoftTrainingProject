@@ -24,4 +24,6 @@ public interface WtrMapper extends BaseMapper<String, Wtr> {
     //根据TRANSACTION_ID更新wtr状态
     int updateWtrStatus(@Param("transaction_id") int transaction_id, @Param("status") int status);
 
+    int getMaxId();
+
 }

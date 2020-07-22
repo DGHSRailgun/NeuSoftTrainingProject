@@ -2,6 +2,7 @@ package com.neusoft.bsp.user.service;
 
 import com.github.pagehelper.PageInfo;
 import com.neusoft.bsp.user.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,11 @@ public interface UserService {
      * @param rawPassword 原始密码
      * @return
      */
-    boolean checkLogin(String username,String rawPassword) throws Exception;
+    boolean checkLogin(String username, String rawPassword) throws Exception;
+
+    int getBuyerIdByUserName(String username);
+
+    int updateBuyerId(String username, int man_buyer_id);
 
 
 }

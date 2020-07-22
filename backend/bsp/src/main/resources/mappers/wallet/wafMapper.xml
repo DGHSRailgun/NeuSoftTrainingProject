@@ -21,6 +21,13 @@
                                        where buyer_id = #{buyer_id}
     </update>
 
+    <update id="updateMoney">
+        update waf_wallet_account_fund set available_money = #{a_money}, depositing_money = #{d_money},
+                                           withdrawing_money = #{w_money}
+        where buyer_id = #{buyer_id}
+    </update>
+
+
 
 
 </mapper>

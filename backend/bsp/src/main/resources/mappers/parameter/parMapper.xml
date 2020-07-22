@@ -7,7 +7,7 @@
     <select id="searchAllPar" resultType="Par">
         select * from par_parameter
     </select>
-    
+
     <insert id="insertPar" parameterType="Par">
         insert into par_parameter values (null,#{param_cd},#{param_value},#{description},#{created_by},#{creation_date},
                                           #{last_update_by},#{last_update_date},#{call_cnt},#{remark},#{sts_cd});
@@ -18,12 +18,16 @@
                                  created_by = #{created_by}, creation_date = #{creation_date},
                                  last_update_by = #{last_update_by}, last_update_date = #{last_update_date},
                                  call_cnt = #{call_cnt}, remark = #{remark}, sts_cd = #{sts_cd}
-                             where par_id = #{par_id}
+        where par_id = #{par_id}
     </update>
 
     <delete id="deletePar" parameterType="int">
         delete from par_parameter where par_id = #{par_id}
     </delete>
+
+    <select id="searchParByCd" resultType="Par">
+        select * from par_parameter where param_cd like #{param_cd}
+    </select>
 
 
 </mapper>

@@ -6,6 +6,8 @@ import com.neusoft.bsp.wallet.service.WafService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service("WafService")
 public class WafServiceImpl implements WafService {
 
@@ -25,5 +27,10 @@ public class WafServiceImpl implements WafService {
     @Override
     public int updateWaf(Waf waf) {
         return wafMapper.updateWaf(waf);
+    }
+
+    @Override
+    public int updateMoney(int buyer_id, BigDecimal a_money, BigDecimal d_money, BigDecimal w_money) {
+        return wafMapper.updateMoney(buyer_id, a_money, d_money, w_money);
     }
 }

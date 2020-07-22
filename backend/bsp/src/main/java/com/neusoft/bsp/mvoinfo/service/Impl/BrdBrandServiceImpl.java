@@ -34,4 +34,9 @@ public class BrdBrandServiceImpl implements BrdBrandService {
     public int updateBrand(BrdBrand brdBrand) {
         return brdBrandMapper.updateBrand(brdBrand);
     }
+
+    @Override
+    public int searchLastedId() {
+        return brdBrandMapper.searchLastedId();
+    }
 }
