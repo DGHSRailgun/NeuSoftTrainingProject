@@ -16,7 +16,9 @@ class BspApplicationTests {
     @Test
     void contextLoads() {
         List<User> users = userMapper.getAll();
-        System.out.println(users+"!!!!!!!!!!!!!!!!!!1");
+        System.out.println(users);
     }
+
+
 
 }

@@ -5,14 +5,14 @@ import com.neusoft.bsp.common.validationGroup.DeleteGroup;
 import com.neusoft.bsp.common.validationGroup.InsertGroup;
 import com.neusoft.bsp.common.validationGroup.SelectGroup;
 import com.neusoft.bsp.common.validationGroup.UpdateGroup;
-import org.apache.ibatis.annotations.Delete;
 
 import javax.validation.constraints.NotNull;
 
+
 public class User implements BaseEntity<String> {
-    @NotNull(message = "The userid shouldn't be null",groups = {InsertGroup.class, UpdateGroup.class, DeleteGroup.class})  //addUser  user_id shouldn't be null updateuser selectsuer deleteuser
+    @NotNull(message = "The userid shouldn't be null", groups = {InsertGroup.class, UpdateGroup.class, SelectGroup.class})
     String user_id;
-    @NotNull(message = "The username shouldn't be null",groups = {InsertGroup.class, UpdateGroup.class})
+    @NotNull(message = "The username shouldn't be null", groups = {InsertGroup.class, UpdateGroup.class})
     String username;
     String password;
     String name;
@@ -150,7 +150,7 @@ public class User implements BaseEntity<String> {
 
     @Override
     public String getId() {
-        return this.user_id ;
+        return this.user_id;
     }
 
     @Override
@@ -170,7 +170,7 @@ public class User implements BaseEntity<String> {
                 ", email='" + email + '\'' +
                 ", number='" + number + '\'' +
                 ", phone='" + phone + '\'' +
-                ", man_buyer_id=" + man_buyer_id +
+                ", man_buyer_id='" + man_buyer_id + '\'' +
                 '}';
     }
 }
