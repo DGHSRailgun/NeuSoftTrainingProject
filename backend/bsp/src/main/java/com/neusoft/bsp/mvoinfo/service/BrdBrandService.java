@@ -13,4 +13,9 @@ public interface BrdBrandService {
     int deleteBrand(int brd_id);
 
     int updateBrand(BrdBrand brdBrand);
+<<<<<<< HEAD
+=======
+
+    int searchLastedId();
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 }

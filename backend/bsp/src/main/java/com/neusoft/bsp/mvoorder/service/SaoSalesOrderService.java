@@ -12,4 +12,9 @@ public interface SaoSalesOrderService {
 
     int shipSao(int sao_id);
 
+<<<<<<< HEAD
+=======
+    int cancelSao(int sao_id);
+
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 }

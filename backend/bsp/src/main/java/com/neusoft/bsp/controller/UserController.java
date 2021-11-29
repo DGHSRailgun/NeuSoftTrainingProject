@@ -34,18 +34,19 @@ public class UserController extends BaseController {
                     new Object[]{user.toString()});
         } else {
             BaseModel result = new BaseModel();
-            int i = userService.insert(user);
-            if (i == 1) {
-                result.code = 200;
-                return result;
-            } else {
-                throw BusinessException.INSERT_FAIL;
-            }
+             int i = userService.insert(user);
+             if (i == 1) {
+                 result.code = 200;
+                 return result;
+             }else {
+                 throw BusinessException.INSERT_FAIL;
+             }
         }
     }
 
     @PostMapping("/checkUser")
-    public BaseModelJson<User> checkUserForVue(@RequestBody User user) {
+    public BaseModelJson<List<User>> checkUserForVue(@RequestBody User user) {
+
         Map<String, Object> map = new HashMap<>();
         map.put("username", user.getUsername());
         map.put("password", user.getPassword());
@@ -53,31 +54,78 @@ public class UserController extends BaseController {
         if (users.size() == 0) {
             throw BusinessException.USERNAME_NOT_EXISTS;
         } else {
-            BaseModelJson<User> result = new BaseModelJson();
+            BaseModelJson<List<User>> result = new BaseModelJson<>();
             result.code = 200;
+            result.data = users;
             return result;
-        }
-    }
 
-    @GetMapping("/getInfo")
-    public BaseModelJson<Map> getInfoForVue() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("roles", new String[]{"admin-token"});
-        map.put("introduction", "I am a super administrator");
-        map.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        map.put("name", "Super Admin");
-        BaseModelJson<Map> result = new BaseModelJson();
-        result.data = map;
-        result.code = 200;
-        return result;
+        }
     }
 
     @PostMapping("/logout")
     public BaseModelJson<String> logout() {
-        BaseModelJson<String> result = new BaseModelJson();
-        result.data = "success";
+
+            BaseModelJson result = new BaseModelJson();
+            result.code = 200;
+            result.data = "success";
+            return result;
+
+    }
+
+
+    @GetMapping("/getInfo")
+    public BaseModelJson getInfoForVue(@RequestParam String username) {
+//        User u = userService.getByName(username);
+        List<String> roles = userService.getRolesByName(username);
+        Map<String, Object> map = new HashMap<>();
+        map.put("roles", roles);
+        map.put("introduction", "I am an NEUer");
+        map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        map.put("name", username);
+        BaseModelJson<Map> result = new BaseModelJson();
         result.code = 200;
+        result.data = map;
+        System.out.println("get==========================");
         return result;
+
+
+    }
+
+        @PostMapping("/userlist")
+        public BaseModelJson<PageInfo<User>> getUserList(Integer pageNum, Integer pageSize, @RequestParam(required = false) Map<String, Object> map)
+        {
+
+            BaseModelJson<PageInfo<User>> result = new BaseModelJson();
+            if (pageNum == null) {
+                pageNum = 1;
+            }
+
+            if (pageSize == null) {
+                pageSize = 10;
+            }
+
+
+            result.code = 200;
+            result.data = userService.getAllByFilter(pageNum, pageSize, map);
+
+            return result;
+        }
+
+    @PostMapping("/updateUser")
+    public BaseModel updateUser(@Validated({UpdateGroup.class}) @RequestBody User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw BusinessException.USERID_NULL_ERROR.newInstance(this.getErrorResponse(bindingResult),
+                    new Object[]{user.toString()});
+        } else {
+            BaseModel result = new BaseModel();
+            int i = userService.update(user);
+            if (i == 1) {
+                result.code = 200;
+                return result;
+            }else {
+                throw BusinessException.UPDATE_FAIL;
+            }
+        }
     }
 
     @PostMapping("/deleteUser")
@@ -87,47 +135,17 @@ public class UserController extends BaseController {
                     new Object[]{user.toString()});
         } else {
             BaseModel result = new BaseModel();
-            int i = userService.delete(user.getId());
+            int i = userService.delete(user.getUser_id());
             if (i == 1) {
                 result.code = 200;
                 return result;
-            } else {
+            }else {
                 throw BusinessException.DELETE_FAIL;
             }
         }
     }
-    //当MVO公司信息不存在时,更新man_buyer_id
-    @PostMapping("/updateUser")
-    public BaseModel updateUser(@Validated({UpdateGroup.class}) @RequestBody User user, BindingResult bindingResult) {  //bindingResult用于获得validate的反馈信息
-        if (bindingResult.hasErrors()) {
-            throw BusinessException.USERID_NULL_ERROR.newInstance(this.getErrorResponse(bindingResult),
-                    new Object[]{user.toString()});
-        } else {
-            BaseModel result = new BaseModel();
-            int i =userService.update(user);
-            if(i==1){
-                result.code = 200;
-                return result;
-            }else{
-                throw BusinessException.UPDATE_FAIL;
-            }
-        }
-    }
 
-    @PostMapping("/userlist")
-    public BaseModelJson<PageInfo<User>> getUserList(Integer pageNum, Integer pageSize,
-                                                     @RequestBody User user) {
-        Map<String, Object> map = new HashMap<>();
-        BaseModelJson<PageInfo<User>> result = new BaseModelJson();
-        if (pageNum == null) {
-            pageNum = 1;
-        }
-        if (pageSize == null) {
-            pageSize = 10;
-        }
-        result.code = 200;
-        result.data = userService.getAllByFilter(pageNum, pageSize, map);
 
-        return result;
-    }
+
+
 }

@@ -28,4 +28,12 @@ public class SaoSalesOrderServiceImpl implements SaoSalesOrderService {
     public int shipSao(int sao_id) {
         return saoSalesOrderMapper.shipSao(sao_id);
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public int cancelSao(int sao_id) {
+        return saoSalesOrderMapper.cancelSao(sao_id);
+    }
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 }

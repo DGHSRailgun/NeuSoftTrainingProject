@@ -16,4 +16,13 @@
         update sao_sales_order set order_sts = 'SHIPPED' where sao_id = #{sao_id}
     </update>
 
+<<<<<<< HEAD
 </mapper>
+=======
+    <update id="cancelSao" parameterType="int">
+        update sao_sales_order set order_sts = 'Canceled' where sao_id = #{sao_id}
+    </update>
+
+
+</mapper>
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584

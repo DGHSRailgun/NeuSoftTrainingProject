@@ -9,16 +9,29 @@ import com.neusoft.bsp.common.validationGroup.InsertGroup;
 import com.neusoft.bsp.multientitys.WaaWafWtrWta;
 import com.neusoft.bsp.wallet.entity.Waa;
 import com.neusoft.bsp.wallet.entity.Waf;
+<<<<<<< HEAD
 import com.neusoft.bsp.wallet.service.WaaService;
 import com.neusoft.bsp.wallet.service.WafService;
+=======
+import com.neusoft.bsp.wallet.entity.Wta;
+import com.neusoft.bsp.wallet.entity.Wtr;
+import com.neusoft.bsp.wallet.service.WaaService;
+import com.neusoft.bsp.wallet.service.WafService;
+import com.neusoft.bsp.wallet.service.WtaService;
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 import com.neusoft.bsp.wallet.service.WtrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
 import java.sql.SQLException;
 import java.util.HashMap;
+=======
+import java.util.HashMap;
+import java.util.List;
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 import java.util.Map;
 
 @CrossOrigin
@@ -35,9 +48,18 @@ public class WalletController extends BaseController {
     @Autowired
     WtrService wtrService;
 
+<<<<<<< HEAD
     //查询用户钱包信息
     @RequestMapping("/getWalletInfo")
     public BaseModelJson<Map> getWalletInfo(@RequestBody String account_name){
+=======
+    @Autowired
+    WtaService wtaService;
+
+    //查询用户钱包信息
+    @PostMapping("/getWalletInfo")
+    public BaseModelJson<Map> getWalletInfo(@RequestParam String account_name){
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 
         BaseModelJson<Map> result = new BaseModelJson();
         Map resultMap = new HashMap();
@@ -54,7 +76,11 @@ public class WalletController extends BaseController {
             resultMap.put("waa", null);
             resultMap.put("waf", null);
             result.data = resultMap;
+<<<<<<< HEAD
             result.message = "no result";
+=======
+            result.message = "未查询到账户信息，跳转注册";
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
             result.code = 201;
         }
         return result;
@@ -62,6 +88,7 @@ public class WalletController extends BaseController {
 
     //钱包注册(插入waa和waf)
     @RequestMapping("/registerWallet")
+<<<<<<< HEAD
     public BaseModel registerWallet(@Validated(InsertGroup.class) @RequestBody Waa waa, Waf waf,
                                     BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
@@ -71,6 +98,17 @@ public class WalletController extends BaseController {
             BaseModel result = new BaseModel();
             int i = waaService.insertWaa(waa);
             int j = wafService.insertWaf(waf);
+=======
+    public BaseModel registerWallet(@Validated(InsertGroup.class) @RequestBody WaaWafWtrWta w,
+                                    BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            throw BusinessException.INSERT_FAIL.newInstance(this.getErrorResponse(bindingResult),
+                    new Object[]{w.toString()});
+        } else {
+            BaseModel result = new BaseModel();
+            int i = waaService.insertWaa(w.getWaa());
+            int j = wafService.insertWaf(w.getWaf());
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
             if (i == 1 && j == 1){
                 result.code = 200;
                 result.message = "success";
@@ -102,10 +140,19 @@ public class WalletController extends BaseController {
                         new Object[]{multiResult.toString()});
             }else {//更新waf, 插入wtr和wta
                 try{
+<<<<<<< HEAD
                     wafService.updateWaf(multiResult.getWaf());//更新waf
                     wtrService.insertWtr(multiResult.getWtr());//插入wtr
 
 
+=======
+                    System.out.println("=====");
+                    wafService.updateWaf(multiResult.getWaf());//更新waf
+                    wtrService.insertWtr(multiResult.getWtr());//插入wtr
+                    System.out.println(wtrService.getMaxId());
+                    multiResult.getWta().setTransaction_id(wtrService.getMaxId());
+                    wtaService.insertWta(multiResult.getWta());//插入wta
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
                     result.code = 200;
                     result.message = "success";
                 }catch (Exception e){
@@ -121,6 +168,43 @@ public class WalletController extends BaseController {
         return result;
     }
 
+<<<<<<< HEAD
+=======
+    //查看流水记录
+    @RequestMapping("/searchBusinessFlow")
+    public BaseModelJson<Map<String,Object>> searchBusinessFlow(@RequestBody Waa waa, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            throw BusinessException.BUYERID_NULL_ERROR.newInstance(this.getErrorResponse(bindingResult),
+                    new Object[]{waa.getBuyer_id()});
+
+        }else {
+            Map<String,Object> resultMap = new HashMap();
+            List<Wtr> resultWtr = wtrService.searchWtrByBuyerId(waa.getBuyer_id());//查询wtr
+            List<Wta> resultWta = wtaService.searchWtaByBuyerId(waa.getBuyer_id());//查询wta
+            resultMap.put("wtr",resultWtr);
+            resultMap.put("wta",resultWta);
+            BaseModelJson<Map<String,Object>> result = new BaseModelJson();//返回结果
+            result.data = resultMap;
+            if (resultWtr.size() != 0 && resultWta.size() != 0){
+                result.message = "success";
+                result.code = 200;
+            }else if (resultWtr.size() == 0 && resultWta.size() != 0){
+                result.message = "no wtr result";
+                result.code = 201;
+            }else if (resultWtr.size() != 0 && resultWta.size() == 0){
+                result.message = "no wta result";
+                result.code = 202;
+            }else {
+                result.message = "no wtr & wta result";
+                result.code = 203;
+            }
+            return result;
+        }
+
+
+    }
+
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 
 
 }

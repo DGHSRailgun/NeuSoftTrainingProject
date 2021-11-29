@@ -17,4 +17,10 @@ public interface BrdBrandMapper extends BaseMapper<String, BrdBrand> {
     //修改品牌信息
     int updateBrand(BrdBrand brdBrand);
 
+<<<<<<< HEAD
+=======
+    //查询新增最大的id
+    int searchLastedId();
+
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 }

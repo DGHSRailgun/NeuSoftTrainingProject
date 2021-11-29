@@ -16,4 +16,17 @@ public class PckPackageInfoServiceImpl implements PckPackageInfoService {
     public PckPackageInfo searchPck(int pro_id) {
         return pckPackageInfoMapper.searchPck(pro_id);
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public int updateByPro_id(String pro_id, String width, String height, String length, String weight) {
+        return pckPackageInfoMapper.updateByPro_id(pro_id, width, height, length, weight);
+    }
+
+    @Override
+    public int insertByPro_id(String pro_id, String width, String height, String length, String weight) {
+        return pckPackageInfoMapper.insertByPro_id(pro_id, width, height, length, weight);
+    }
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 }

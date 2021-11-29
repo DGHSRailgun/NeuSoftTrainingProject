@@ -1,5 +1,16 @@
 package com.neusoft.bsp.utils.redis;
 
+<<<<<<< HEAD
+=======
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.ListPosition;
+import redis.clients.jedis.SortingParams;
+
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -8,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+<<<<<<< HEAD
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +29,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.SortingParams;
 
+=======
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
 @Component
 @Slf4j
 public class RedisUtil{
@@ -2304,4 +2318,8 @@ public class RedisUtil{
 			System.out.println(string);
 		}*/
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584

@@ -14,5 +14,31 @@
                                                           #{transaction_desc},#{foreign_exchange_fee},#{withdraw_fee})
     </insert>
 
+<<<<<<< HEAD
 
 </mapper>
+=======
+    <select id="searchWtrByBuyerId" parameterType="int" resultType="Wtr">
+        select * from wtr_wallet_transaction_record where buyer_id = #{buyer_id}
+    </select>
+
+    <select id="searchAllWtrByFilter" resultType="Wtr">
+        select * from wtr_wallet_transaction_record where transaction_type != 3
+    </select>
+
+    <select id="searchWtrById" parameterType="int" resultType="Wtr">
+        select * from wtr_wallet_transaction_record where transaction_id = #{transaction_id}
+    </select>
+
+    <select id="getMaxId" resultType="java.lang.Integer">
+        select max(transaction_id) from wtr_wallet_transaction_record
+    </select>
+
+    <update id="updateWtrStatus">
+        update wtr_wallet_transaction_record set status = #{status} where transaction_id = #{transaction_id}
+    </update>
+
+
+
+</mapper>
+>>>>>>> 147ea4175745faeaf000fa1b320bf55d7a313584
